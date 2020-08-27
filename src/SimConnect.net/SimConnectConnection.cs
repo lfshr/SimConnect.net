@@ -85,12 +85,10 @@ namespace SimConnectNet
                 throw new ConnectionFailureException("Failed to connect to Microsoft Flight Simulator. COM Error", exception);
             }
 
-            _simConnect.ReceiveDispatch(SimConnect_ReceiveDispatch);
             _tickThread.Start();
 
             while (!_isConnected)
             {
-                
                 await Task.Delay(1);
             }
         }
