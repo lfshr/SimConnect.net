@@ -16,4 +16,12 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimConnect.net\SimConnect.net.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(SolutionDir)..\sdk\SimConnect.cfg&quot; &quot;$(OutDir)&quot; /Y&#xD;&#xA;xcopy &quot;$(SolutionDir)..\sdk\0.5.1\lib\SimConnect.dll&quot; &quot;$(OutDir)&quot; /Y" />
+  </Target>
+
 </Project>
