@@ -7,10 +7,10 @@ using SimConnectNet.Models;
 
 namespace SimConnect.net.Console.Models
 {
-    [SimObjectType(SimConnectType.User)]
-    public class User : SimObject
+    [SimQueryType(SimConnectType.User)]
+    public class User : SimDataQuery
     {
-        [SimObjectVariable(SimVariable.AdfName, UnitOfMeasurement.String)]
+        [SimQueryVariable(SimVariable.AdfName, UnitOfMeasurement.String)]
         public string Name { get; set; }
     }
 }

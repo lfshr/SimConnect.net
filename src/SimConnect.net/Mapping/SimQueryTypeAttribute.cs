@@ -15,11 +15,11 @@ namespace SimConnectNet.Mapping
     }
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class SimObjectTypeAttribute : Attribute
+    public class SimQueryTypeAttribute : Attribute
     {
         public SimConnectType SimConnectType { get; }
 
-        public SimObjectTypeAttribute(SimConnectType simConnectType)
+        public SimQueryTypeAttribute(SimConnectType simConnectType)
         {
             SimConnectType = simConnectType;
         }

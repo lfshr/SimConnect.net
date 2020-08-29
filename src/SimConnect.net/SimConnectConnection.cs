@@ -109,20 +109,20 @@ namespace SimConnectNet
         }
 
         public T GetUser<T>()
-            where T : SimObject, new()
+            where T : SimDataQuery, new()
         {
-            var classAttribute = typeof(T).GetCustomAttribute<SimObjectTypeAttribute>();
+            var classAttribute = typeof(T).GetCustomAttribute<SimQueryTypeAttribute>();
             if (classAttribute == null || classAttribute.SimConnectType != SimConnectType.User)
             {
                 throw new InvalidOperationException(
-                    "Class specified in GetUser must contain a SimObjectTypeAttribute, and be of type SimConnectType.User!");
+                    "Class specified in GetUser must contain a SimQueryTypeAttribute, and be of type SimConnectType.User!");
             }
 
             return GetObject<T>(1);
         }
 
         public T GetObject<T>(int objectId)
-            where T : SimObject, new()
+            where T : SimDataQuery, new()
         {
             var obj = new T();
             obj.Initialize(_simConnect, objectId);

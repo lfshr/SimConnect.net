@@ -60,12 +60,12 @@ namespace SimConnectNet.Models
             }
 
             var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .Where(p => p.GetCustomAttributes(typeof(SimObjectVariableAttribute)).Any())
+                .Where(p => p.GetCustomAttributes(typeof(SimQueryVariableAttribute)).Any())
                 .ToList();
 
             foreach (var property in properties)
             {
-                var attribute = property.GetCustomAttribute<SimObjectVariableAttribute>();
+                var attribute = property.GetCustomAttribute<SimQueryVariableAttribute>();
                 var datumName = MappingUtils.ConvertSimVariableToSimulationString(attribute.Variable);
                 var uom = MappingUtils.ConvertUnitOfMeasurementToSimulationString(attribute.UnitOfMeasurement);
                 var simConnectType = MappingUtils.GetSimConnectDataTypeMapping(property.PropertyType);
