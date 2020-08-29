@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using SimConnect.net.Console.Models;
 using SimConnectNet;
+using SimConnectNet.Models;
 
 namespace SimConnect.net.Console
 {
@@ -10,6 +12,8 @@ namespace SimConnect.net.Console
         {
             var connection = new SimConnectConnection("Test");
             await connection.ConnectAsync();
+
+            var user = connection.GetUser<User>();
         }
     }
 }

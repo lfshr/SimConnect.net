@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.FlightSimulator.SimConnect;
 using SimConnectNet.Exceptions;
+using SimConnectNet.Mapping;
+using SimConnectNet.Models;
 
 namespace SimConnectNet
 {
@@ -101,6 +106,27 @@ namespace SimConnectNet
             {
                 _isConnected = true;
             }
+        }
+
+        public T GetUser<T>()
+            where T : SimObject, new()
+        {
+            var classAttribute = typeof(T).GetCustomAttribute<SimObjectTypeAttribute>();
+            if (classAttribute == null || classAttribute.SimConnectType != SimConnectType.User)
+            {
+                throw new InvalidOperationException(
+                    "Class specified in GetUser must contain a SimObjectTypeAttribute, and be of type SimConnectType.User!");
+            }
+
+            return GetObject<T>(1);
+        }
+
+        public T GetObject<T>(int objectId)
+            where T : SimObject, new()
+        {
+            var obj = new T();
+            obj.Initialize(_simConnect, objectId);
+            return obj;
         }
     }
 }
